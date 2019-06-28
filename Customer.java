@@ -20,6 +20,7 @@ public class Customer
         this.name = name;
         this.ID = ID;
     }
+    
     public Customer()
     {
     }
@@ -38,10 +39,12 @@ public class Customer
     {
         this.category = category;
     }
+    
     public String getCategory()
     {
         return this.category;
     }
+    
     public String getName()
     {
         return this.name;

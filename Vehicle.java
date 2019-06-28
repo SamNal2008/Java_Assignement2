@@ -19,6 +19,10 @@ public class Vehicle
     {
         
     }
+    public Vehicle(int RN)
+    {
+        this.RN = RN;
+    }
     
     public void setRN(int RN) //set registration number
     {

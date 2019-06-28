@@ -18,76 +18,69 @@ public class Company
     public Company(String name)
     {
         this.name = name;
-        Customer c = new Customer("none",0);
-        this.customerList.add(c);
     }
-    
-    public boolean addVehicle(Vehicle vehicle)
-    {
-        ArrayList<Vehicle> newList = new ArrayList();
-        boolean added = false;
-        for(int i = 0;i<this.vehicleList.size()-1;i++)
-        {
-            if(this.vehicleList.get(i).getRN()==vehicle.getRN())
-            {
-                System.out.println("This vehicle is already registred");
-                return false;
-            }
-            newList.add(this.vehicleList.get(i));
-            if(this.vehicleList.get(i+1).getRN()>vehicle.getRN())  
-            {
-                newList.add(vehicle);
-                added = true;
-            }
-        }
-        newList.add(this.vehicleList.get(this.vehicleList.size()-1));
-        if(!added)
-        {
-            newList.add(vehicle);
-            this.vehicleList = newList;
-            return true;
-        }
-        return false;
- 
-    }
-    
+
     public ArrayList<Vehicle> getVehicleList()
     {
         return this.vehicleList;
     }
-    
+
     public ArrayList<Customer> getCustomerList()
     {
         return this.customerList;
     }
-    
+
     public boolean addCustomer(Customer customer)
     {
-        ArrayList<Customer> newList = new ArrayList();
-        boolean added = false;
-        for(int i = 0;i<this.customerList.size()-1;i++)
+        this.customerList.add(customer);
+        return true;
+    }
+
+    public boolean addVehicle(Vehicle vehicle)
+    {
+        this.vehicleList.add(vehicle);
+        return true;
+    }
+
+    public boolean deleteVehicle(int RN)//delete the vehicle with the RN entered
+    {
+        for(int i = 0;i<this.vehicleList.size();i++)
         {
-            if(this.customerList.get(i).getID()==customer.getID())
+            if(this.vehicleList.get(i).getRN()==RN)
             {
-                System.out.println("This customer is already registred");
-                return false;
-            }
-            newList.add(this.customerList.get(i));
-            if(this.customerList.get(i+1).getID()>customer.getID())  
-            {
-                newList.add(customer);
-                added = true;
+                this.vehicleList.remove(this.vehicleList.get(i));
+                System.out.println("Your vehicle has been deleted successfully");
+                return true;
             }
         }
-        newList.add(this.customerList.get(this.customerList.size()-1));
-        if(!added)
-        {
-            newList.add(customer);
-            this.customerList = newList;
-            return true;
-        }
+        System.out.println("Your vehicle has not been found");
         return false;
     }
-        
-   
+    
+    public boolean deleteCustomer(int ID)//delete the customer with the ID entered
+    {
+        for(int i = 0;i<this.customerList.size();i++)
+        {
+            if(this.customerList.get(i).getID()==ID)
+            {
+                this.customerList.remove(this.customerList.get(i));
+                System.out.println("Your vehicle has been deleted successfully");
+                return true;
+            }
+        }
+        System.out.println("Your vehicle has not been found");
+        return false;
+    }
+    
+    public void display()
+    {
+        System.out.println("The name of company is :" + this.name);
+        System.out.println("---------------------------------------");
+        System.out.println("Here is the list of the vehicle");
+        for(int i = 0;i<this.vehicleList.size();i++)
+        {
+            //vehicleList.get(i).display();
+        }
+    }
+
 }
