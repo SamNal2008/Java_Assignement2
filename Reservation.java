@@ -1,4 +1,4 @@
-
+import java.io.*;
 import java.util.*;
 /**
  * Write a description of class Reservation here.
@@ -17,6 +17,7 @@ public class Reservation
     private Date pupDate = new Date(); //pickup date
     private String pupLoc;//pickup location
     private Date retDate = new Date(); // return date
+    private int nb_res;
     
     public Reservation()
     {
@@ -28,7 +29,7 @@ public class Reservation
         this.customer = new Customer(name,ID);
     }
 
-    public Reservation(Vehicle v, Customer c,Date reservationDate,Date pickupDate,int period,String pickupLocation,Date returnDate)
+    public Reservation(Vehicle v, Customer c,Date reservationDate,Date pickupDate,int period,String pickupLocation,Date returnDate,int res)
     {
         this.vehicle = v;//need to take it from the list of vehicle
         this.customer = c;//same but customers
@@ -37,6 +38,7 @@ public class Reservation
         this.period = period;
         this.pupLoc = pickupLocation;
         this.retDate = returnDate;
+        this.nb_res = res;
         newReservation();
     }
 
@@ -145,6 +147,27 @@ public class Reservation
         return this.retDate;
     }
     
+    public void display()
+    {
+        System.out.format("|%5d",this.nb_res);
+        this.vehicle.display();
+        this.customer.display();
+        System.out.format("%4d", this.period);
+        System.out.format("|%10s",this.pupLoc);
+        displayDate(this.resDate);
+        displayDate(this.pupDate);
+        displayDate(this.retDate);
+        System.out.println("|");
+    }
+    
+    public void displayDate(Date date)
+    {
+        String res = "";
+        res+=Integer.toString(date.getMonth()) + "-" + Integer.toString(date.getDate()) + "-" + Integer.toString(date.getYear());
+        res+=" ";
+        res+=Integer.toString(date.getHours()) + ":" +Integer.toString(date.getMinutes());
+        System.out.format("|%12s",res);
+    }
     
     
 }

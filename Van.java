@@ -39,7 +39,7 @@ public class Van extends Vehicle
     {
         super.display();
         System.out.format("|%4d",this.LoadCapacity);
-        System.out.println("|");       
+        System.out.print("|");       
     }
     
 }

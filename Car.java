@@ -39,6 +39,6 @@ public class Car extends Vehicle
     {
         super.display();
         System.out.format("|%4d",this.EngineCapacity);
-        System.out.println("|");       
+        System.out.print("|");       
     }
 }

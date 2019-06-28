@@ -100,5 +100,11 @@ public class Vehicle
             System.out.print("|    No");
         }
     }
+    
+    public String toString()
+    {
+        String res = "the vehicle " + this.modelName + " : " + this.RN + " from " + this.year + ". the type of the fuel is : " + this.TypeFuel ; 
+        return res;
+    }
 
 }

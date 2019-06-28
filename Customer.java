@@ -11,7 +11,7 @@ public class Customer
     private int ID;
     private String name;
     private String category;
-
+    //private enum category {premium, standard,budget};
     /**
      * Constructor for objects of class Customer
      */
@@ -19,6 +19,12 @@ public class Customer
     {
         this.name = name;
         this.ID = ID;
+    }
+    public Customer(String name,int ID,String category)
+    {
+        this.name = name;
+        this.ID = ID;
+        this.category = category;
     }
     
     public Customer()
@@ -49,5 +55,18 @@ public class Customer
     {
         return this.name;
     }
-
+    
+    public void display()
+    {
+        System.out.format("%4s",this.name);
+        System.out.format("|%4d",this.ID);
+        System.out.format("|%7s",this.category);
+        System.out.print("|");
+    }
+    
+    public String toString()
+    {
+        String res = "the customer " + this.name + " : " + this.ID + " who has the category " + this.category; 
+        return res;
+    }
 }
