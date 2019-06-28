@@ -24,7 +24,7 @@ public class Reservation
 
     public Reservation(int RN,String name,int ID)
     {
-        this.vehicle = new Vehicle(RN);
+        this.vehicle = new Vehicle();
         this.customer = new Customer(name,ID);
     }
 
