@@ -7,6 +7,7 @@ import java.util.*;
  */
 public class UI
 {
+    
     public static void main(String[] args) 
     {
         System.out.println("Bienvenido en el cartel de la coche y de la vane");
@@ -16,8 +17,9 @@ public class UI
         Vehicle vec3 = new Car(12347, "picaso" , 2010,  "oil",5);
         Vehicle vec4 = new Van(12348, "combi" , 2004,  "gasual",250);
         //Creation customers
-        Customer cus1 = new Customer("Sam",1,"Premium");
-        Customer cus2 = new Customer("Evan",2,"PD");
+        
+        Customer cus1 = new Customer("Sam",1);
+        Customer cus2 = new Customer("Evan",2);
         
         //Creation Company
         Company comp = new Company("Mafia");

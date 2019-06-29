@@ -11,15 +11,17 @@ public class Customer
     private int ID;
     private String name;
     private String category;
-    //private enum category {premium, standard,budget};
     /**
      * Constructor for objects of class Customer
      */
+    
     public Customer(String name,int ID)
     {
         this.name = name;
         this.ID = ID;
+        this.category = "Standard";
     }
+    
     public Customer(String name,int ID,String category)
     {
         this.name = name;
