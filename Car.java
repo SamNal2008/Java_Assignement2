@@ -19,9 +19,9 @@ public class Car extends Vehicle
         this.EngineCapacity = 0;
     }
     
-    public Car(int RN, String model , int year,  String fuel,int Capacity)
+    public Car(int RN, String model , int year,  String fuel,String repair,int Capacity)
     {
-        super(RN,model,year,fuel);
+        super(RN,model,year,fuel,repair);
         this.EngineCapacity = Capacity;
     }
     
@@ -39,6 +39,6 @@ public class Car extends Vehicle
     {
         super.display();
         System.out.format("|%4d",this.EngineCapacity);
-        System.out.println("|");       
+        System.out.print("|");       
     }
 }

@@ -19,9 +19,9 @@ public class Van extends Vehicle
         this.LoadCapacity = 0;
     }
     
-    public Van(int RN, String model , int year,  String fuel,int Capacity)
+    public Van(int RN, String model , int year,  String fuel, String repair ,int Capacity)
     {
-        super(RN,model,year,fuel);
+        super(RN,model,year,fuel,repair);
         this.LoadCapacity = Capacity;
     }
     
@@ -39,7 +39,7 @@ public class Van extends Vehicle
     {
         super.display();
         System.out.format("|%4d",this.LoadCapacity);
-        System.out.println("|");       
+        System.out.print("|");       
     }
     
 }

@@ -1,3 +1,4 @@
+
 import java.util.*;
 /**
  * Write a description of class Company here.
@@ -79,8 +80,18 @@ public class Company
         System.out.println("Here is the list of the vehicle");
         for(int i = 0;i<this.vehicleList.size();i++)
         {
-            //vehicleList.get(i).display();
+            vehicleList.get(i).display();
+            System.out.println("");
         }
+        System.out.println("---------------------------------------");
+        System.out.println("Here is the list of the vehicle");
+        for(int i = 0;i<this.customerList.size();i++)
+        {
+            customerList.get(i).display();
+            System.out.println("");
+        }
+        System.out.println("---------------------------------------");
+        
     }
 
 }

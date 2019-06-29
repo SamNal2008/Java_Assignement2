@@ -92,8 +92,14 @@ public class Vehicle
         System.out.format("|%10s",this.modelName);
         System.out.format("|%4d" , this.year);
         System.out.format("|%10s",this.TypeFuel);
-        System.out.format("|%10s",this.repair);
+        System.out.format("|%13s",this.repair);
 
+    }
+    
+    public String toString()
+    {
+        String res = "the vehicle " + this.modelName + " : " + this.RN + " from " + this.year + ". the type of the fuel is : " + this.TypeFuel ; 
+        return res;
     }
 
 }
