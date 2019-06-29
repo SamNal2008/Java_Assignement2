@@ -1,4 +1,3 @@
-
 import java.util.*;
 /**
  * Write a description of class Company here.
@@ -12,7 +11,7 @@ public class Company
     private String name;
     private ArrayList<Customer> customerList = new ArrayList();
     private ArrayList<Vehicle> vehicleList = new ArrayList();
-
+    private ArrayList<Reservation> resList = new ArrayList();
     /**
      * Constructor for objects of class Company
      */
@@ -73,6 +72,22 @@ public class Company
         return false;
     }
     
+    public boolean newRes(Reservation reservation)
+    {
+        for(int i = 0;i<this.resList.size();i++)
+        {
+           if(resList.get(i).getNbRes()==reservation.getNbRes())
+           {
+               System.out.println("This reservation is already registred");
+               return false;
+            }
+        }
+        resList.add(reservation);
+        return true;
+        
+    }
+           
+            
     public void display()
     {
         System.out.println("The name of company is :" + this.name);

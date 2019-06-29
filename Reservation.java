@@ -147,6 +147,15 @@ public class Reservation
         return this.retDate;
     }
     
+    public int getNbRes()
+    {
+        return this.nb_res;
+    }
+    public Vehicle getVehicle()
+    {
+        return this.vehicle;
+    }
+    
     public void display()
     {
         System.out.format("|%5d",this.nb_res);
