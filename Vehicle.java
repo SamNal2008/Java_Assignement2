@@ -12,7 +12,7 @@ public class Vehicle
     protected String modelName;
     protected int year;//year of registration
     protected String TypeFuel;
-    protected boolean repair;
+    protected String repair;
 
     /**
      * Constructor for objects of class Vehicle
@@ -23,16 +23,17 @@ public class Vehicle
         this.modelName = "";
         this.year = 0;
         this.TypeFuel = "";
-        this.repair = false;
+        this.repair = "";
     }
 
 
-    public Vehicle(int RN, String model , int year,  String fuel)
+    public Vehicle(int RN, String model , int year,  String fuel, String repair)
     {
         this.RN = RN;
         this.modelName = model;
         this.year = year;
         this.TypeFuel = fuel;
+        this.repair = repair;
     }
 
     public void setRN(int RN) //set registration number
@@ -75,12 +76,12 @@ public class Vehicle
         this.TypeFuel = Fuel;
     }
 
-    public boolean getRepair()
+    public String getRepair()
     {
         return this.repair;
     }
 
-    public void setRepair(boolean repair)
+    public void setRepair(String repair)
     {
         this.repair = repair;
     }
@@ -91,14 +92,8 @@ public class Vehicle
         System.out.format("|%10s",this.modelName);
         System.out.format("|%4d" , this.year);
         System.out.format("|%10s",this.TypeFuel);
-        if (this.repair)
-        {
-            System.out.print("|   Yes");
-        }
-        else
-        {
-            System.out.print("|    No");
-        }
+        System.out.format("|%13s",this.repair);
+
     }
     
     public String toString()

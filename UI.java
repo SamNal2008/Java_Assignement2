@@ -5,6 +5,10 @@ import java.util.*;
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
 public class UI
 {
     
@@ -12,10 +16,11 @@ public class UI
     {
         System.out.println("Bienvenido en el cartel de la coche y de la vane");
         //Creation Vehicles
-        Vehicle vec1 = new Car(12345, "aveo" , 2016,  "diesel",7);
-        Vehicle vec2 = new Car(12346, "mini" , 2014,  "gasual",5);
-        Vehicle vec3 = new Car(12347, "picaso" , 2010,  "oil",5);
-        Vehicle vec4 = new Van(12348, "combi" , 2004,  "gasual",250);
+        Vehicle vec1 = new Car(12345, "aveo" , 2016,  "diesel","reaparation",7);
+        Vehicle vec2 = new Car(12346, "mini" , 2014,  "gasual","Available",5);
+        Vehicle vec3 = new Car(12347, "picaso" , 2010,  "oil","Unvailbale",5);
+        Vehicle vec4 = new Van(12348, "combi" , 2004,  "gasual","Available",250);
+        
         //Creation customers
         
         Customer cus1 = new Customer("Sam",1);
@@ -48,27 +53,5 @@ public class UI
         Reservation res1 = new Reservation(vec1,cus1,resDate,pupDate,5,"12 Jhon Street",retDate,15498756);
         res1.display();
 
-    }
-
-    public static void display_separation(int n)
-    {
-        for (int i = 0; i < n;i++)
-        {
-            System.out.print("+---");
-        }
-        System.out.println("+");
-    }
-
-    public static void display(int tab[][])
-    {
-        for(int i = 0; i < tab.length; i++)
-        {
-            display_separation(tab[i].length);
-            for (int j = 0; j < tab[i].length;j++)
-            {
-                System.out.format("|%2d ",tab[i][j]);
-            }
-            System.out.println("|");
-        }
     }
 }

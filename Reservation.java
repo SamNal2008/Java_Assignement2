@@ -158,6 +158,7 @@ public class Reservation
     
     public void display()
     {
+
         System.out.format("|%5d",this.nb_res);
         this.vehicle.display();
         this.customer.display();
