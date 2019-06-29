@@ -145,6 +145,15 @@ public class Reservation
         return this.retDate;
     }
     
+    public void display()
+    {
+        System.out.format("|%5d",this.vehicle.getRN());
+        System.out.format("|%10s",this.customer);
+        System.out.format("|%4d", this.period);
+        System.out.format("|%10s",this.pupLoc);
+        System.out.println("|");
+    }
+    
     
     
 }
