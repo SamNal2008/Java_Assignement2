@@ -16,12 +16,14 @@ public class Car extends Vehicle
     public Car()
     {
         super();
+        super.hourlyRate = 10;
         this.EngineCapacity = 0;
     }
     
     public Car(int RN, String model , int year,  String fuel,String repair,int Capacity)
     {
         super(RN,model,year,fuel,repair);
+        super.hourlyRate = 10;
         this.EngineCapacity = Capacity;
     }
     

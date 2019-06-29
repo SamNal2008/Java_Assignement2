@@ -16,7 +16,7 @@ public class UI
     {
         System.out.println("Bienvenido en el cartel de la coche y de la vane");
         //Creation Vehicles
-        Vehicle vec1 = new Car(12345, "aveo" , 2016,  "diesel","reaparation",7);
+        Vehicle vec1 = new Car(12345, "aveo" , 2016,  "diesel","Available",7);
         Vehicle vec2 = new Car(12346, "mini" , 2014,  "gasual","Available",5);
         Vehicle vec3 = new Car(12347, "picaso" , 2010,  "oil","Unvailbale",5);
         Vehicle vec4 = new Van(12348, "combi" , 2004,  "gasual","Available",250);
@@ -28,30 +28,54 @@ public class UI
         
         //Creation Company
         Company comp = new Company("Mafia");
+        //comp.display();
+        System.out.println("*****************************");
         comp.addVehicle(vec1);
         comp.addVehicle(vec2);
         comp.addCustomer(cus1);
         comp.addCustomer(cus2);
         comp.display();
+        System.out.println("*****************************");
         //Creation date
         Date resDate = new Date();
-        resDate.setDate(10);
-        resDate.setMonth(2);
         resDate.setYear(2019);
-        resDate.setHours(10); 
-        resDate.setMinutes(7);
         
         Date pupDate = new Date();
-        pupDate.setDate(10);
+        pupDate.setDate(9);
         pupDate.setMonth(2);
         pupDate.setYear(2019);
-        pupDate.setHours(10);
-        pupDate.setMinutes(6);
+        pupDate.setHours(11);
+        pupDate.setMinutes(16);
         
-        Date retDate = new Date(2019,5,5);
+        Date pupDate2 = new Date();
+        pupDate2.setDate(10);
+        pupDate2.setMonth(2);
+        pupDate2.setYear(2019);
+        pupDate2.setHours(11);
+        pupDate2.setMinutes(16);
+        
+        int period = 5;
+        int hours = (pupDate.getHours()+period);
+        Date retDate = new Date();
+        retDate.setDate(pupDate.getDate());
+        retDate.setMonth(pupDate.getMonth());
+        retDate.setYear(pupDate.getYear());
+        retDate.setHours(hours);
+        retDate.setMinutes(pupDate.getMinutes());
+        
+        System.out.println(hours);
+        retDate.setHours(hours);
+
         //Reservation 
-        Reservation res1 = new Reservation(vec1,cus1,resDate,pupDate,5,"12 Jhon Street",retDate,15498756);
-        res1.display();
+        Reservation res1 = new Reservation(comp.getVehicleList().get(1),cus1,resDate,pupDate,5,"12 Jhon Street",15498756);
+        Reservation res2 = new Reservation(comp.getVehicleList().get(0),cus1,resDate,pupDate2,5,"12 Jhon Street",15498757);
+        System.out.println("*****************************");
+        comp.newRes(res1);
+        comp.newRes(res2);
+        comp.display();
+        System.out.println("*****************************");
+        comp.returnVehicle(res1);
+        comp.display();
 
     }
 }

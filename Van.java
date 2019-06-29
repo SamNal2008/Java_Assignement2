@@ -17,11 +17,13 @@ public class Van extends Vehicle
     {
         super();
         this.LoadCapacity = 0;
+        super.hourlyRate = 15;
     }
     
     public Van(int RN, String model , int year,  String fuel, String repair ,int Capacity)
     {
         super(RN,model,year,fuel,repair);
+        super.hourlyRate = 15;
         this.LoadCapacity = Capacity;
     }
     

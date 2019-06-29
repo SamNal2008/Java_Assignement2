@@ -12,7 +12,8 @@ public class Vehicle
     protected String modelName;
     protected int year;//year of registration
     protected String TypeFuel;
-    protected String repair;
+    protected String state;
+    protected int hourlyRate;
 
     /**
      * Constructor for objects of class Vehicle
@@ -23,17 +24,17 @@ public class Vehicle
         this.modelName = "";
         this.year = 0;
         this.TypeFuel = "";
-        this.repair = "";
+        this.state = "Free";
     }
 
 
-    public Vehicle(int RN, String model , int year,  String fuel, String repair)
+    public Vehicle(int RN, String model , int year,  String fuel, String state)
     {
         this.RN = RN;
         this.modelName = model;
         this.year = year;
         this.TypeFuel = fuel;
-        this.repair = repair;
+        this.state = state;
     }
 
     public void setRN(int RN) //set registration number
@@ -76,23 +77,31 @@ public class Vehicle
         this.TypeFuel = Fuel;
     }
 
-    public String getRepair()
+    public String getState()
     {
-        return this.repair;
+        return this.state;
     }
 
-    public void setRepair(String repair)
+    public void setState(String state)
     {
-        this.repair = repair;
+        this.state = state;
     }
-
+    
+    public boolean isFree()
+    {
+        return this.state.equals("Available");
+    }
+    public int getHourlyRate()
+    {
+        return this.hourlyRate;
+    }
     public void display()
     {
         System.out.format("|%5d",this.RN);
         System.out.format("|%10s",this.modelName);
         System.out.format("|%4d" , this.year);
         System.out.format("|%10s",this.TypeFuel);
-        System.out.format("|%13s",this.repair);
+        System.out.format("|%13s",this.state);
 
     }
     

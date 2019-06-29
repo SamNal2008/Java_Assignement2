@@ -29,7 +29,7 @@ public class Reservation
         this.customer = new Customer(name,ID);
     }
 
-    public Reservation(Vehicle v, Customer c,Date reservationDate,Date pickupDate,int period,String pickupLocation,Date returnDate,int res)
+    public Reservation(Vehicle v, Customer c,Date reservationDate,Date pickupDate,int period,String pickupLocation,int res)
     {
         this.vehicle = v;//need to take it from the list of vehicle
         this.customer = c;//same but customers
@@ -37,15 +37,15 @@ public class Reservation
         this.pupDate = pickupDate;
         this.period = period;
         this.pupLoc = pickupLocation;
-        this.retDate = returnDate;
+        int hours = this.pupDate.getHours()+period;
+        this.retDate.setDate(this.pupDate.getDate());
+        this.retDate.setMonth(this.pupDate.getMonth());
+        this.retDate.setYear(this.pupDate.getYear());
+        this.retDate.setHours(hours);
+        this.retDate.setMinutes(this.pupDate.getMinutes());
         this.nb_res = res;
-        newReservation();
     }
 
-    public void newReservation()
-    {
-        //this.vehicle.setStatut("Hired");
-    }
 
     public boolean setResDate()
     {
@@ -151,6 +151,7 @@ public class Reservation
     {
         return this.nb_res;
     }
+    
     public Vehicle getVehicle()
     {
         return this.vehicle;
