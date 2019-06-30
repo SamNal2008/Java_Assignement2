@@ -14,6 +14,7 @@ public class Vehicle
     protected String TypeFuel;
     protected String state;
     protected int hourlyRate;
+    protected Date availableDate = new Date();
 
     /**
      * Constructor for objects of class Vehicle
@@ -94,6 +95,26 @@ public class Vehicle
     {
         return this.state.equals("Available");
     }
+    
+    public boolean setAvailableDate(Date date)
+    {
+        if(date.before(this.availableDate))
+        {
+            System.out.println("The available is after the new entered");
+            return false;
+        }
+        else
+        {
+            this.availableDate = date;
+            return true;
+        }
+    }
+    
+    public Date getAvailableDate()
+    {
+        return this.availableDate;
+    }
+            
     public int getHourlyRate()
     {
         return this.hourlyRate;

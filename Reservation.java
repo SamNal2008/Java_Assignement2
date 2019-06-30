@@ -20,6 +20,7 @@ public class Reservation
     private int nb_res;
     private Scanner read = new Scanner(System.in);
     private boolean exists = false;
+    private Date realRetDate = new Date();
 
     public Reservation()
     {
@@ -27,7 +28,13 @@ public class Reservation
 
     public Reservation(Customer c,Vehicle v,Date pupDate,int period,String pupLoc)
     {
-
+        setPupDate(pupDate);
+        setVehicle(v);
+        setCustomer(c);
+        setResDate();
+        setPeriod(period);
+        setPupLoc(pupLoc);
+        setRetDate();
         if(setVehicle(v)&& setCustomer(c)&&setResDate()&&setPupDate(pupDate)&&setPeriod(period)&&setPupLoc(pupLoc)&&setRetDate())
         {
             this.exists =true;
@@ -47,7 +54,7 @@ public class Reservation
     
     public boolean setVehicle(Vehicle v)
     {
-        if(v.isFree())
+        if(v.getAvailableDate().before(this.pupDate))
         {
             this.vehicle = v;
             return true;
@@ -81,7 +88,14 @@ public class Reservation
         this.retDate.setMinutes(this.pupDate.getMinutes());
         this.nb_res = res;
     }
-
+    public void setRealRetDate(Date date)
+    {
+        this.realRetDate = date;
+    }
+    public Date getRealRetDate()
+    {
+        return this.realRetDate;
+    }
     public boolean setResDate()
     {
 
@@ -269,6 +283,8 @@ public class Reservation
 
     public Customer getCustomer()
     {return this.customer;}
+    
+    
 
     public void display()
     {

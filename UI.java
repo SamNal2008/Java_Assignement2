@@ -1,4 +1,7 @@
 import java.util.*;
+import java.io.FileReader;
+import java.io.IOException;
+ 
 /**
  * Décrivez votre classe UI ici.
  *
@@ -43,8 +46,8 @@ public class UI
       
         
         Date pupDate = new Date();
-        pupDate.setDate(30);
-        pupDate.setMonth(5);
+        pupDate.setDate(23);
+        pupDate.setMonth(6);
         pupDate.setHours(8);
         pupDate.setMinutes(50);
         
@@ -74,8 +77,9 @@ public class UI
         
         System.out.println("*****************************");
         comp.newRes(res);
-        Reservation res2 = new Reservation(cus2,comp.getVehicleList().get(0),pupDate2,period,"Rue du palmier");
+        Reservation res2 = new Reservation(cus2,comp.getVehicleList().get(1),pupDate,period,"Rue du palmier");
         comp.newRes(res2);
+        
         comp.display();
         /*
         comp.newRes(res2);
@@ -83,8 +87,22 @@ public class UI
         System.out.println("*****************************");
         */
 
-        comp.returnVehicle(res);
-        comp.display();
+        //comp.returnVehicle(res);
+        //comp.display();
+        
+        
+        try {
+            FileReader reader = new FileReader("MyFile.txt");
+            int character;
+ 
+            while ((character = reader.read()) != -1) {
+                System.out.print((char) character);
+            }
+            reader.close();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

@@ -32,6 +32,7 @@ public class Company
 
     public boolean addCustomer(Customer customer)
     {
+        customer.setID(this.customerList.size());
         this.customerList.add(customer);
         return true;
     }
@@ -81,9 +82,11 @@ public class Company
                 if(this.vehicleList.get(i).getRN() == reservation.getVehicle().getRN())
                 {
                     this.vehicleList.get(i).setState("Hired");
+                    this.vehicleList.get(i).setAvailableDate(reservation.getRetDate());
                     reservation.setNbRes(this.resList.size());
                     this.resList.add(reservation);
                     System.out.println("The reservation has been added successfully");
+                    sorted();
                     return true;
                 }
 
@@ -94,9 +97,28 @@ public class Company
         else
         {
             System.out.println("The reservation is not valid");
-
             return false;
         }
+    }
+
+    public void sorted()
+    {
+        ArrayList<Reservation> sortedList = new ArrayList();
+
+        while(!this.resList.isEmpty())
+        {
+            Reservation mini = resList.get(0);
+            for(int j = 0;j<this.resList.size();j++)
+            {
+                if(this.resList.get(j).getpupDate().before(mini.getpupDate()))
+                {
+                    mini = this.resList.get(j);
+                }
+            }
+            sortedList.add(mini);
+            this.resList.remove(mini);
+        }
+        this.resList = sortedList;
     }
 
     public int returnVehicle(Reservation reservation)
@@ -105,7 +127,7 @@ public class Company
 
         for(int i = 0;i<this.vehicleList.size();i++)
         {
-            if(this.vehicleList.get(i).getRN()==reservation.getVehicle().getRN())
+            if(this.vehicleList.get(i).equals(reservation.getVehicle()))
             {
                 this.vehicleList.get(i).setState("Available");
             }
@@ -119,10 +141,35 @@ public class Company
         else
         {
             int price = (today.getHours() - reservation.getRetDate().getHours()) * reservation.getVehicle().getHourlyRate();
+            reservation.setRealRetDate(today);
             System.out.println("You need to pay extra fees: "+ price +" dollars");
             return price;
         }
     }
+
+    public void showAvailableVeh(String wanted)
+    {
+        for(int i = 0;i<this.vehicleList.size();i++)
+        {
+            if(wanted.equals("car")){
+                if(this.vehicleList.get(i).isFree()&& this.vehicleList.get(i) instanceof Car)
+                {
+                    this.vehicleList.get(i).display();
+                }
+            }
+            else
+            {
+                if(wanted.equals("van"))
+                {
+                    if(this.vehicleList.get(i).isFree()&& this.vehicleList.get(i) instanceof Van)
+                    {
+                        this.vehicleList.get(i).display();
+                    }
+                }
+            }
+        }
+    }
+
 
     public void display()
     {
