@@ -31,6 +31,7 @@ public class Customer
     
     public Customer()
     {
+        
     }
     public boolean equals(Customer c)
     {

@@ -20,14 +20,15 @@ public class Reservation
     private int nb_res;
     private Scanner read = new Scanner(System.in);
     private boolean exists = false;
-    private Date realRetDate = new Date();
+    private Date realRetDate = null;
 
     public Reservation()
     {
     }
 
-    public Reservation(Customer c,Vehicle v,Date pupDate,int period,String pupLoc)
+    public Reservation(Customer c,Vehicle v,Date pupDate,int period,String pupLoc,int resN)
     {
+        this.nb_res = resN;
         setPupDate(pupDate);
         setVehicle(v);
         setCustomer(c);
@@ -72,7 +73,7 @@ public class Reservation
         return true;
     }
 
-    public Reservation(Vehicle v, Customer c,Date pickupDate,int period,String pickupLocation,int res)
+    public Reservation(Vehicle v, Customer c,Date pickupDate,int period,String pickupLocation, int NR)
     {
         this.vehicle = v;//need to take it from the list of vehicle
         this.customer = c;//same but customers
@@ -86,7 +87,8 @@ public class Reservation
         this.retDate.setYear(this.pupDate.getYear());
         this.retDate.setHours(hours);
         this.retDate.setMinutes(this.pupDate.getMinutes());
-        this.nb_res = res;
+        this.exists = true;
+        this.nb_res = NR;
     }
     public void setRealRetDate(Date date)
     {
@@ -150,7 +152,7 @@ public class Reservation
                     }
                     else
                     {
-                        System.out.println(delai);
+                       
                         System.out.println("For the client of category :" + this.customer.getCategory() + " the reservation should be made at least 1 hours before the pickup");
                         return false;
                     }
@@ -168,7 +170,7 @@ public class Reservation
                 }
                 else
                 {
-                    System.out.println(time);
+                    
                     System.out.println("It's too early to make a reservation");
                     return false;
                 }

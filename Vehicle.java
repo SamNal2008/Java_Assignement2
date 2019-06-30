@@ -28,7 +28,6 @@ public class Vehicle
         this.state = "Free";
     }
 
-
     public Vehicle(int RN, String model , int year,  String fuel, String state)
     {
         this.RN = RN;
@@ -100,7 +99,7 @@ public class Vehicle
     {
         if(date.before(this.availableDate))
         {
-            System.out.println("The available is after the new entered");
+            System.out.println("The current available date is after the new one entered");
             return false;
         }
         else

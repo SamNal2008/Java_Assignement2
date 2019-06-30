@@ -12,6 +12,7 @@ public class Company
     private ArrayList<Customer> customerList = new ArrayList();
     private ArrayList<Vehicle> vehicleList = new ArrayList();
     private ArrayList<Reservation> resList = new ArrayList();
+    private Scanner scan = new Scanner(System.in);
     /**
      * Constructor for objects of class Company
      */
@@ -29,6 +30,11 @@ public class Company
     {
         return this.customerList;
     }
+    
+    public ArrayList<Reservation> getResList()
+    {
+        return this.resList;
+    }
 
     public boolean addCustomer(Customer customer)
     {
@@ -36,6 +42,41 @@ public class Company
         this.customerList.add(customer);
         return true;
     }
+    
+    public Customer getCustomer(int ID)
+    {
+        for(int i = 0;i<this.customerList.size();i++)
+        {
+            if(this.customerList.get(i).getID() == ID)
+            {
+                return this.customerList.get(i);
+            }
+        }
+        System.out.println("User was not found, let's create a new customer");
+        System.out.println("What is the name of the new customer");
+        String name = scan.nextLine();
+        System.out.println("What is the category of the new customer");
+        String category = scan.nextLine();
+        Customer cus = new Customer(name,ID,category);
+        this.customerList.add(cus);
+        return cus;
+    }
+    
+    public Vehicle getVehicle(int RN)
+    {
+        Vehicle vec = new Vehicle();
+        for(int i = 0;i<this.vehicleList.size();i++)
+        {
+            if(this.vehicleList.get(i).getRN() == RN)
+            {
+                vec =  this.vehicleList.get(i);
+                return vec;
+            }
+        }
+        System.out.println("This vehicle doesnt exist");
+        return vec;
+    }
+            
 
     public boolean addVehicle(Vehicle vehicle)
     {
@@ -121,10 +162,19 @@ public class Company
         this.resList = sortedList;
     }
 
-    public int returnVehicle(Reservation reservation)
+    public int returnVehicle(int NR)
     {
         Date today = new Date();
-
+        Reservation reservation = new Reservation();
+        for(int i = 0;i<this.resList.size();i++)
+        {
+            if(this.resList.get(i).getNbRes()==NR)
+            {
+                reservation =this.resList.get(i);
+                break;
+            }
+        }
+        
         for(int i = 0;i<this.vehicleList.size();i++)
         {
             if(this.vehicleList.get(i).equals(reservation.getVehicle()))
@@ -135,7 +185,8 @@ public class Company
 
         if(today.before(reservation.getRetDate()))
         {
-            System.out.println("Thank you have a good day");
+            System.out.println("Thank you everything is ok");
+            reservation.setRealRetDate(today);
             return 0;
         }
         else
@@ -147,26 +198,15 @@ public class Company
         }
     }
 
-    public void showAvailableVeh(String wanted)
+    public void showAvailableVeh()
     {
         for(int i = 0;i<this.vehicleList.size();i++)
         {
-            if(wanted.equals("car")){
-                if(this.vehicleList.get(i).isFree()&& this.vehicleList.get(i) instanceof Car)
+            if(this.vehicleList.get(i).isFree())//&& this.vehicleList.get(i) instanceof Car)
                 {
                     this.vehicleList.get(i).display();
+                    System.out.println();
                 }
-            }
-            else
-            {
-                if(wanted.equals("van"))
-                {
-                    if(this.vehicleList.get(i).isFree()&& this.vehicleList.get(i) instanceof Van)
-                    {
-                        this.vehicleList.get(i).display();
-                    }
-                }
-            }
         }
     }
 
@@ -186,7 +226,7 @@ public class Company
             System.out.println("");
         }
         System.out.println("---------------------------------------");
-        System.out.println("Here is the list of the vehicle");
+        System.out.println("Here is the list of the Customers");
         if(this.customerList.size()==0)
         {
             System.out.println("You dont have customer yet");
