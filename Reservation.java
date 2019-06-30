@@ -9,8 +9,8 @@ import java.util.*;
 public class Reservation
 {
     // instance variables - replace the example below with your own
-    private Vehicle vehicle = new Vehicle();
-    private Customer customer = new Customer();
+    private Vehicle vehicle;
+    private Customer customer;
     private Date today = new Date();//today's date
     private int period;
     private Date resDate = new Date();//reservation date
@@ -18,22 +18,58 @@ public class Reservation
     private String pupLoc;//pickup location
     private Date retDate = new Date(); // return date
     private int nb_res;
-    
+    private Scanner read = new Scanner(System.in);
+    private boolean exists = false;
+
     public Reservation()
     {
     }
 
-    public Reservation(int RN,String name,int ID)
+    public Reservation(Customer c,Vehicle v,Date pupDate,int period,String pupLoc)
     {
-        this.vehicle = new Vehicle();
-        this.customer = new Customer(name,ID);
+
+        if(setVehicle(v)&& setCustomer(c)&&setResDate()&&setPupDate(pupDate)&&setPeriod(period)&&setPupLoc(pupLoc)&&setRetDate())
+        {
+            this.exists =true;
+            System.out.println("The reservation has been created");
+            System.out.println("***************************************");
+        }
+
+        /*System.out.println("When do you want to pickup the car ?");
+        this.pupDate = read.next();*/
+
+    }
+    
+    public boolean exists()
+    {
+        return this.exists;
+    }
+    
+    public boolean setVehicle(Vehicle v)
+    {
+        if(v.isFree())
+        {
+            this.vehicle = v;
+            return true;
+        }
+        else
+        {
+            System.out.println("Sorry the vehicle is not available");
+            return false;
+        }
     }
 
-    public Reservation(Vehicle v, Customer c,Date reservationDate,Date pickupDate,int period,String pickupLocation,int res)
+    public boolean setCustomer(Customer c)
+    {
+        this.customer = c;
+        return true;
+    }
+
+    public Reservation(Vehicle v, Customer c,Date pickupDate,int period,String pickupLocation,int res)
     {
         this.vehicle = v;//need to take it from the list of vehicle
         this.customer = c;//same but customers
-        this.resDate = reservationDate;
+        setResDate();
         this.pupDate = pickupDate;
         this.period = period;
         this.pupLoc = pickupLocation;
@@ -46,9 +82,9 @@ public class Reservation
         this.nb_res = res;
     }
 
-
     public boolean setResDate()
     {
+
         if(today.getHours()<4 &&today.getHours()>0)
         {
             System.out.println("Sorry you cannot make a reservation now you need to wait until 4am");
@@ -57,7 +93,9 @@ public class Reservation
         else
         {
             this.resDate = this.today;
-            System.out.println("The reservation has been made at this day :" + this.resDate);
+            System.out.print("The reservation has been asked  this day : ");
+            displayDate(this.resDate);
+            System.out.println("");
             return true;
         }
     }
@@ -69,16 +107,63 @@ public class Reservation
 
     public boolean setPupDate(Date date)
     {
-        if(this.today.after(date))
+        if(this.resDate.before(date))
         {
-            System.out.println("The entered date is already past");
-            return false;
+            if(this.resDate.getDate() == date.getDate() && this.resDate.getMonth()==date.getMonth()&&this.resDate.getYear()==date.getYear())
+            {
+                int delai = (date.getHours()*60+date.getMinutes()) -  ( this.resDate.getHours()*60 + this.resDate.getMinutes() );
+                if(this.customer.getCategory() == "budget")
+                {
+                    if(delai>(5*60))
+                    {
+                        this.pupDate = date;
+                        System.out.println("The pick up date will be : " + this.pupDate.toString());
+                        return true;
+                    }
+                    else
+                    {
+                        System.out.println("For the client of category : " + this.customer.getCategory()+ "the reservation  should be made 5 hours before");
+                        return false;
+                    }
+                }
+                else
+                {
+                    if(delai>60)
+                    {
+                        this.pupDate = date;
+                        System.out.println("The pick up date will be : "+ this.pupDate.toString());
+                        return true;
+                    }
+                    else
+                    {
+                        System.out.println(delai);
+                        System.out.println("For the client of category :" + this.customer.getCategory() + " the reservation should be made at least 1 hours before the pickup");
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                
+                int time = (date.getMonth()*30 + date.getDate()) - (this.resDate.getMonth() * 30 + this.resDate.getDate())  ;
+                if(time<=30)
+                {
+                    this.pupDate = date;
+                    System.out.println("The pickup date will be : " + this.pupDate.toString());
+                    return true;
+                }
+                else
+                {
+                    System.out.println(time);
+                    System.out.println("It's too early to make a reservation");
+                    return false;
+                }
+            }
         }
         else
         {
-            this.pupDate = date;
-            System.out.println("The pick up date is : "+this.pupDate);
-            return true;
+            System.out.println("You cannot make a reservation for a past date");
+            return false;
         }
     }
 
@@ -96,9 +181,34 @@ public class Reservation
         }
         else
         {
-            this.period = period;
-            System.out.println("The period of hiring the vehicle is :"+this.period+" hours");
-            return true;
+            if(this.customer.getCategory().equals("Premium"))
+            {
+                if(period<=20)
+                {
+                    this.period = period;
+                    System.out.println("The period of hiring the vehicle is :"+this.period+" hours");
+                    return true;
+                }
+                else
+                {
+                    System.out.println("The period for premium member can not exceed 20 hours");
+                    return false;
+                }
+            }
+            else
+            {
+                if(period<=15)
+                {
+                    this.period = period;
+                    System.out.println("The period of hiring the vehicle is :"+this.period+" hours");
+                    return true;
+                }
+                else
+                {
+                    System.out.println("The period for non premium member can not exceed 15 hours");
+                    return false;
+                }
+            }
         }
     }
 
@@ -106,14 +216,14 @@ public class Reservation
     {
         return this.period;
     }
-    
+
     public boolean setPupLoc(String location)
     {
-       if(!location.equals(""))
-       {
-           this.pupLoc = location;
-           System.out.println("The pick up location is "+this.pupLoc);
-           return true;
+        if(!location.equals(""))
+        {
+            this.pupLoc = location;
+            System.out.println("The pick up location is "+this.pupLoc);
+            return true;
         }
         else
         {
@@ -121,42 +231,45 @@ public class Reservation
             return false;
         }
     }
-    
+
     public String getPupLoc()
     {
         return this.pupLoc;
     }
-    
-    public boolean setRetDate(Date date)
+
+    public boolean setRetDate()
     {
-        if(this.pupDate.before(date))
-        {
-            System.out.println("The return date should be after the pick up date");
-            return false;
-        }
-        else
-        {
-            this.retDate = date;
-            System.out.println("The return date is : "+this.retDate);
-            return true;
-        }
+        int hours = this.pupDate.getHours()+period;
+        this.retDate.setDate(this.pupDate.getDate());
+        this.retDate.setMonth(this.pupDate.getMonth());
+        this.retDate.setYear(this.pupDate.getYear());
+        this.retDate.setHours(hours);
+        this.retDate.setMinutes(this.pupDate.getMinutes());
+        return true;
     }
-    
+
     public Date getRetDate()
     {
         return this.retDate;
     }
-    
+    public boolean setNbRes(int nb)
+    {
+        this.nb_res = nb;
+        return true;
+    }
     public int getNbRes()
     {
         return this.nb_res;
     }
-    
+
     public Vehicle getVehicle()
     {
         return this.vehicle;
     }
-    
+
+    public Customer getCustomer()
+    {return this.customer;}
+
     public void display()
     {
 
@@ -170,7 +283,7 @@ public class Reservation
         displayDate(this.retDate);
         System.out.println("|");
     }
-    
+
     public void displayDate(Date date)
     {
         String res = "";
@@ -179,6 +292,5 @@ public class Reservation
         res+=Integer.toString(date.getHours()) + ":" +Integer.toString(date.getMinutes());
         System.out.format("|%12s",res);
     }
-    
-    
+
 }

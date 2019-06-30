@@ -74,38 +74,35 @@ public class Company
 
     public boolean newRes(Reservation reservation)
     {
-        for(int i = 0;i<this.vehicleList.size();i++)
+        if(reservation.exists())
         {
-            
-            if(this.vehicleList.get(i).getRN() == reservation.getVehicle().getRN())
+            for(int i = 0;i<this.vehicleList.size();i++)
             {
-                if(!this.vehicleList.get(i).isFree())
-                {
-                    System.out.println("The vehicle is not available");
-                    return false;
-                }
-                else
+                if(this.vehicleList.get(i).getRN() == reservation.getVehicle().getRN())
                 {
                     this.vehicleList.get(i).setState("Hired");
+                    reservation.setNbRes(this.resList.size());
                     this.resList.add(reservation);
                     System.out.println("The reservation has been added successfully");
                     return true;
                 }
+
             }
+            System.out.println("You don't have vehicle yet");
+            return false;
         }
-        System.out.println("You don't have vehicle yet");
-        return false;
+        else
+        {
+            System.out.println("The reservation is not valid");
+
+            return false;
+        }
     }
-
-   
-
-
 
     public int returnVehicle(Reservation reservation)
     {
         Date today = new Date();
-       
-            
+
         for(int i = 0;i<this.vehicleList.size();i++)
         {
             if(this.vehicleList.get(i).getRN()==reservation.getVehicle().getRN())

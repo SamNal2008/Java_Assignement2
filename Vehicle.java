@@ -36,7 +36,10 @@ public class Vehicle
         this.TypeFuel = fuel;
         this.state = state;
     }
-
+    public boolean equals(Vehicle v)
+    {
+        return this.RN == v.getRN();
+    }
     public void setRN(int RN) //set registration number
     {
         this.RN = RN;

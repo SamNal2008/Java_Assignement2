@@ -25,6 +25,8 @@ public class UI
         
         Customer cus1 = new Customer("Sam",1);
         Customer cus2 = new Customer("Evan",2);
+        cus1.setCategory("Premium");
+        cus2.setCategory("Premium");
         
         //Creation Company
         Company comp = new Company("Mafia");
@@ -38,23 +40,21 @@ public class UI
         System.out.println("*****************************");
         //Creation date
         Date resDate = new Date();
-        resDate.setYear(2019);
+      
         
         Date pupDate = new Date();
-        pupDate.setDate(9);
-        pupDate.setMonth(2);
-        pupDate.setYear(2019);
-        pupDate.setHours(11);
-        pupDate.setMinutes(16);
+        pupDate.setDate(30);
+        pupDate.setMonth(5);
+        pupDate.setHours(8);
+        pupDate.setMinutes(50);
         
         Date pupDate2 = new Date();
-        pupDate2.setDate(10);
-        pupDate2.setMonth(2);
-        pupDate2.setYear(2019);
-        pupDate2.setHours(11);
-        pupDate2.setMinutes(16);
+        pupDate2.setDate(24);
+        pupDate2.setMonth(6);
+        pupDate2.setHours(10);
+        pupDate2.setMinutes(50);
         
-        int period = 5;
+        int period = 17;
         int hours = (pupDate.getHours()+period);
         Date retDate = new Date();
         retDate.setDate(pupDate.getDate());
@@ -63,18 +63,27 @@ public class UI
         retDate.setHours(hours);
         retDate.setMinutes(pupDate.getMinutes());
         
-        System.out.println(hours);
-        retDate.setHours(hours);
+       
 
         //Reservation 
-        Reservation res1 = new Reservation(comp.getVehicleList().get(1),cus1,resDate,pupDate,5,"12 Jhon Street",15498756);
-        Reservation res2 = new Reservation(comp.getVehicleList().get(0),cus1,resDate,pupDate2,5,"12 Jhon Street",15498757);
+        Reservation res = new Reservation(cus2,comp.getVehicleList().get(0),pupDate2,period,"Rue jean jaures");
+        
+        //Other constructor for reservation
+        //Reservation res1 = new Reservation(comp.getVehicleList().get(1),cus1,pupDate,5,"12 Jhon Street",15498756);
+        //Reservation res2 = new Reservation(comp.getVehicleList().get(0),cus2,pupDate2,5,"12 Jhon Street",15498757);
+        
         System.out.println("*****************************");
-        comp.newRes(res1);
+        comp.newRes(res);
+        Reservation res2 = new Reservation(cus2,comp.getVehicleList().get(0),pupDate2,period,"Rue du palmier");
         comp.newRes(res2);
         comp.display();
+        /*
+        comp.newRes(res2);
         System.out.println("*****************************");
-        comp.returnVehicle(res1);
+        System.out.println("*****************************");
+        */
+
+        comp.returnVehicle(res);
         comp.display();
 
     }

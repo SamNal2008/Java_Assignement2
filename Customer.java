@@ -32,7 +32,10 @@ public class Customer
     public Customer()
     {
     }
-    
+    public boolean equals(Customer c)
+    {
+        return this.ID == c.getID();
+    }
     public void setID(int ID)
     { 
         this.ID = ID;
